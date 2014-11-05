@@ -1,10 +1,9 @@
 class API::V1::VotersController < ApplicationController
   include ActionController::HttpAuthentication::Token::ControllerMethods
 
-  before_filter :load_voter, only: [:show, :update]
   before_filter :restrict_access_to_voter, only: [:show, :update]
 
-  #before_filter :restrict_access
+  #before_filter :restrict_access<--from railscasts 352
 
   # GET /api/v1/voters/1
   # GET /api/v1/voters/1.json
