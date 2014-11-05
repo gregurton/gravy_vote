@@ -1,6 +1,6 @@
-class VotesController < ApplicationController
-  # POST /votes
-  # POST /votes.json
+class API::V1::VotesController < ApplicationController
+  # POST /api/v1/votes
+  # POST /api/v1/votes.json
   def create
     @vote = Vote.new(vote_params)
 
@@ -9,5 +9,11 @@ class VotesController < ApplicationController
     else
       render json: @vote.errors, status: :unprocessable_entity
     end
+  end
+
+  private
+
+  def vote_params
+    params.require(:vote).permit(:voter, :candidate)
   end
 end
