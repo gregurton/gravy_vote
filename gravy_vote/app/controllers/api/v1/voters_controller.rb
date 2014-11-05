@@ -3,7 +3,6 @@ class VotersController < ApplicationController
   # GET /voters/1.json
   def show
     @voter = Voter.find(params[:id])
-
     render json: @voter
   end
 
@@ -30,10 +29,4 @@ class VotersController < ApplicationController
       render json: @voter.errors, status: :unprocessable_entity
     end
   end
-  #
-  # private
-  #
-  #   def voter_params
-  #     params.require(:voter).permit(:name, :party)
-  #   end
 end

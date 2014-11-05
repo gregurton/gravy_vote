@@ -10,10 +10,4 @@ class VotesController < ApplicationController
       render json: @vote.errors, status: :unprocessable_entity
     end
   end
-
-  # private
-  #
-  #   def vote_params
-  #     params.require(:vote).permit(:voter, :candidate)
-  #   end
 end
