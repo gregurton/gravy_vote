@@ -1,3 +1,5 @@
+require 'securerandom'
+
 class Voter < ActiveRecord::Base
   has_many :votes
 
@@ -14,7 +16,7 @@ class Voter < ActiveRecord::Base
       hash.merge!(token: token)
     end
 
-    {person: hash}
+    {voter: hash}
   end
 
   private

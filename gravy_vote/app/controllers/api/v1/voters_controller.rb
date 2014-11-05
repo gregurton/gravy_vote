@@ -1,8 +1,10 @@
 class API::V1::VotersController < ApplicationController
   include ActionController::HttpAuthentication::Token::ControllerMethods
 
-  before_filter :restrict_access
-  #respond_to :json  <--I don't think this is necessary
+  before_filter :load_voter, only: [:show, :update]
+  before_filter :restrict_access_to_voter, only: [:show, :update]
+
+  #before_filter :restrict_access
 
   # GET /api/v1/voters/1
   # GET /api/v1/voters/1.json
@@ -36,9 +38,9 @@ class API::V1::VotersController < ApplicationController
   end
 
   private
-  def restrict_access
+  def restrict_access_to_voter
     authenticate_or_request_with_http_token do |token, options|
-      ApiKey.exists?(access_token: token)
+      APIKey.exists?(access_token: token)
   end
 
     def voter_params

@@ -1,4 +1,9 @@
 class API::V1::VotesController < ApplicationController
+  include ActionController::HttpAuthentication::Token::ControllerMethods
+  include ActionController::MimeResponds
+
+  before_filter :restrict_access_to_vote, only: [:create]
+
   # POST /api/v1/votes
   # POST /api/v1/votes.json
   def create
@@ -12,6 +17,10 @@ class API::V1::VotesController < ApplicationController
   end
 
   private
+  def restrict_access_to_vote
+    authenticate_or_request_with_http_token do |token, options|
+      APIKey.exists?(access_token: token)
+    end
 
   def vote_params
     params.require(:vote).permit(:voter, :candidate)

@@ -1,4 +1,8 @@
 class API::V1::CandidatesController < ActionController::API
+
+  before_filter :load_candidate, only: [:show]
+
+
   # GET /api/v1/candidates
   # GET /api/v1/candidates.json
   def index
